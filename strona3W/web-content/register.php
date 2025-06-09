@@ -25,7 +25,7 @@
 
 
 <?php
-    $conn = new mysqli("localhost","root", "", "3w");
+    $conn = new mysqli("mysql8","01493838_mateusz", "ZAQ!2wsxZAQ!2wsx","01493838_mateusz");
 
     if($conn -> connect_error){
         echo "błąd".$conn->connect_error;

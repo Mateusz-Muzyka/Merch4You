@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +10,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h3><a href="index.html">Powrót</a></h3>
-    <form method="GET">
+    <h3><a href="index.php">Powrót</a></h3>
+    <form method="POST">
         <div id="logger">
             <label for="nickname">Nazwa użytkownika</label>
             <input type="text" name="nickname" required>
@@ -24,19 +27,23 @@
         
         
     <?php 
-        $conn = new mysqli("localhost","root", "","3w");
+        $conn = new mysqli("mysql8","01493838_mateusz", "ZAQ!2wsxZAQ!2wsx","01493838_mateusz");
         if($conn -> connect_error){
             echo "błąd!".$conn->connect_error;
             exit();
         }
         if(isset($_GET['login-button'])){
             if($_GET['login-button'] == true){
-                $temp_helper = "SELECT * FROM login WHERE nickname = '".$_GET['nickname']."'";
+                $temp_helper = "SELECT * FROM login WHERE nickname = '".$_POST['nickname']."' AND password = '".$_POST['password']."'";   
                 $querry = $temp_helper;
                 $result = $conn -> query($querry);
                 $final = $result->fetch_row();
                 if($final != ""){
-                    echo "zalogowano";
+                    echo "git";
+                    $_SESSION['zalogowany'] = true;
+                    echo $_POST['nickname'];
+                    $_SESSION['nazwa'] = $_POST['nickname'];
+                    
                 }else{
                     echo "błędne poświadczenia";
                 }
